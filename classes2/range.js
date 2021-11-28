@@ -26,7 +26,7 @@ class Range {
     }
 
     // RegExp pour analyser la chaîne avec parse
-    static integerRangePattern = /^[(](\d+)[.]{3}(\d+)[)]$/;
+    static integerRangePattern = /^[(](-?\d+)[.]{3}(-?\d+)[)]$/;
 }
 
 class Span extends Range {
@@ -47,6 +47,7 @@ console.log(range.from);
 console.log(range.to);
 console.log(range.includes(5));
 console.log(range.toString());
+console.log(Range.parse("(12...-2000000)"));
 console.log(Range.parse("(12...2000000)"));
 
 
