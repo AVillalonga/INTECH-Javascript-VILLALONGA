@@ -1,0 +1,1 @@
+document.querySelectorAll("p").forEach(el => { el.insertAdjacentHTML('afterbegin', `${el.innerHTML.length} `); });
