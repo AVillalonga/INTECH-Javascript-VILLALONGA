@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Rotate Puzzle</title>
+		<title>THE PUZZLE YOU DIDN'T KNOW YOU NEEDED</title>
 		<style>
 			html, body {
 				/* margin: 0px; */
@@ -26,11 +27,13 @@
 
 			#canvas {
 				display: grid;
+                width: 500px;
+                height: 500px;
 			}
 
 			#canvas span {
 				display: inline-block;
-				background-image: url("puzzle.jpg");
+				background-image: url("https://cdn.weasyl.com/~dairishgoat/submissions/924991/ba43f0cdd80ec4c4b81521ce3748ecd5039dfb21d41c448666d91dbb52f4b7a2/dairishgoat-furry-fun-in-the-uk-3.jpg");
 			}
 
 			.controls {
@@ -40,10 +43,85 @@
 				margin-bottom: 0.5rem;
 			}
 		</style>
-		<script src="./puzzle.js"></script>
+
+		<script type="module">
+            document.querySelector("#start-game").addEventListener("click", () => {
+				document.querySelector("#canvas").innerHTML = ''
+				document.querySelector("h1").innerText = "ROTATE PUZZLE"
+                generatePieces(document.querySelector("#cells-quantity").value)
+            })
+
+			document.querySelector("#resolve").addEventListener("click", () => {
+				document.querySelectorAll('[data-rotation]').forEach(async (piece) => {
+					for(const update of shouldContinue(piece)) {
+						piece.click();
+						await waitForNext(1000);
+					}
+				})
+			})
+
+			function* shouldContinue(piece) {
+				while (piece.dataset.rotation != '0') {
+					yield true
+				}
+			}
+
+			function waitForNext(ms) {
+				return new Promise(
+					resolve => setTimeout(resolve, ms)
+				);
+			}
+
+            function generatePieces(size) {
+                document.querySelector("#canvas").style.gridTemplateColumns = `repeat(${size}, 1fr)`
+				const pieceSize = 500 / size
+                const piecePc = 100 / size
+
+                const newPiece = document.createElement("span")
+                newPiece.style.height = pieceSize + "px"
+                newPiece.style.width = pieceSize + "px"
+                newPiece.style.backgroundSize = "500px 500px"
+
+				//Create all the pieces
+                for (let column = 0; column < size; column++) {
+                    for (let line = 0; line < size; line++) {
+                        const clone = newPiece.cloneNode(true)
+						const angle = getRandomAngle();
+						clone.dataset.rotation = angle
+						clone.style.transform = `rotate(${angle}deg)`;
+
+						clone.addEventListener('click',  e => {
+							let angle = parseInt(clone.dataset.rotation) + 90
+							angle = (angle === 360) ? 0 : angle
+							clone.dataset.rotation = angle
+							clone.style.transform = `rotate(${angle}deg)`;
+							checkVictory()
+						})
+                        clone.style.backgroundPosition = `${(-line) * pieceSize}px ${(-column) * pieceSize}px`
+                        document.querySelector("#canvas").append(clone)
+                    }
+                }
+            }
+
+			function getRandomAngle() {
+				return Math.floor(Math.random() * 4)*90;
+			}
+
+			function checkVictory() {
+				let badPieces = 0;
+				document.querySelectorAll('[data-rotation]').forEach((piece) => {
+					if (piece.dataset.rotation != '0') badPieces++	
+				})
+				
+				if (badPieces === 0) {
+					document.querySelector("h1").innerText = "GG"
+				}
+			}
+
+		</script>
 	</head>
 	<body class="flex flex-col just-evenly align-center">
-		<h1>Rotate puzzle</h1>
+		<h1>THE PUZZLE YOU DIDN'T KNOW YOU NEEDED</h1>
 		<div class="flex flex-row just-evenly align-start">
 			<div id="canvas"></div>
 			<fieldset class="controls flex flex-col">
