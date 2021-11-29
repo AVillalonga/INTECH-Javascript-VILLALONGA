@@ -12,10 +12,14 @@ function initWith(size, f) {
         .map((v, i) => f(i));
 }
 
-
 const widthZero = () => 0;
 const fromZero = index => index;
 const from42 = index => 42 + index;
-console.log(initWith(5, widthZero));
-console.log(initWith(5, fromZero));
-console.log(initWith(5, from42));
+
+//********************************************************************************
+// TESTS
+//********************************************************************************
+
+initWith(5, widthZero).forEach(e => assert.equal(e, 0));
+initWith(5, fromZero).forEach((e,i) => assert.equal(e, i));
+initWith(5, from42).forEach((e,i) => assert.equal(e, i + 42));
