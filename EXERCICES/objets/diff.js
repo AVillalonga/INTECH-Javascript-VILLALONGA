@@ -7,12 +7,14 @@ const assert = require('chai').assert;
  */
 
 function diff(source, propertyNames) {
-    return Object.keys(source).reduce((accumulator, key) => {
-        for (const deletedKey of Object.keys(propertyNames))
-            if (key !== deletedKey)
-                accumulator[key] = source[key];
-        return accumulator;
-    }, {});
+    const result = {};
+    const find = (property) => Object.getOwnPropertyNames(propertyNames).filter(propertyName => propertyName == property).length > 0;
+    Object.getOwnPropertyNames(source).forEach((key) => {
+        if (!find(key))
+            result[key] = source[key];
+    });
+
+    return result;
 }
 
 //********************************************************************************
