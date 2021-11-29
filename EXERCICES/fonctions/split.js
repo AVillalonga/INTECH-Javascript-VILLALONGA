@@ -14,10 +14,10 @@ function split(str, sep) {
     let slice = '';
     let inc = 0;
 
-    while(inc < str.length) {
-        if(str[inc] === sep[0] && str.length > inc + sep.length) {
+    while (inc < str.length) {
+        if (str[inc] === sep[0] && str.length > inc + sep.length) {
             slice = str.slice(inc, inc + sep.length);
-            if(slice === sep) {
+            if (slice === sep) {
                 str.substring(inc, sep.length);
                 result.push(tmp);
                 tmp = "";

@@ -13,7 +13,7 @@ const padSpaces = padLeft.bind(null, ' ');
 // TESTS
 //********************************************************************************
 
-assert.equal(padLeft("0", "123", 6),"000000123");
+assert.equal(padLeft("0", "123", 6), "000000123");
 assert.equal(padZeros("11011", 8), "0000000011011");
 assert.equal(padSpaces("11011", 8), "        11011");
 
