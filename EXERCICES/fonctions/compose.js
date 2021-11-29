@@ -19,12 +19,9 @@ const increment = x => x + 1;
 const double    = x => x * 2;
 const square    = x => x ** 2;
 
-const doubleAndIncrement = compose(increment, double);
-const squareAndIncrement = compose(increment, square);
-
 //********************************************************************************
 // TESTS
 //********************************************************************************
 
-assert.equal(doubleAndIncrement(2), 5);
-assert.equal(squareAndIncrement(5), 26);
+assert.equal(compose(increment, double)(2), 5);
+assert.equal(compose(increment, square)(5), 26);
