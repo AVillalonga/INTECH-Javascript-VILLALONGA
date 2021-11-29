@@ -1,5 +1,10 @@
 const assert = require('chai').assert;
 
+/**
+ * INIT WITH HOF
+ * Implémentez les fonctions initWithZeros(size) et initFrom(size, nb) en redéfinissant la fonction initWith comme étant une higher-order function.
+ */
+
 function initWith(f) {
     return function (size, nb) {
         return !nb ?
