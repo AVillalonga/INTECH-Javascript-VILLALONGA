@@ -1,7 +1,7 @@
 const assert = require('chai').assert;
 
 /**
- * START WITH
+ * STARTS WITH
  * Réimplémenter la fonction startsWith(str, start) où str est la chaîne contenant éventuellement start.
  * La fonction devra retourner un tableau de chaînes de caractères parmi lesquelles on ne devra pas retrouver 
  * le chaîne sep (puisqu’elle a servi à faire le découpage et qu’on ne la conserve pas).
