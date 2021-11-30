@@ -1,4 +1,7 @@
-// Écrivez le code qui transforme tous les titres d’une page en majuscule, sans utiliser de CSS.
+/**
+ * Écrivez le code qui transforme tous les titres d’une page en majuscule, sans utiliser de CSS.
+ */
+
 (function(el) { 
     el.childNodes.forEach(node => {
         node.nodeType === Node.TEXT_NODE ? 
